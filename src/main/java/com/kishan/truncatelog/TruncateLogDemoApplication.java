@@ -10,3 +10,5 @@ public class TruncateLogDemoApplication {
 		SpringApplication.run(TruncateLogDemoApplication.class, args);
 	}
 }
+// http://localhost:8080/subscribe?orderDetails=123456789012345678901234567890
+// produces output  "12 ... (truncated) ... 90"

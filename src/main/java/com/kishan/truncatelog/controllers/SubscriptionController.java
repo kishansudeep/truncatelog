@@ -3,6 +3,7 @@ package com.kishan.truncatelog.controllers;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -11,9 +12,9 @@ public class SubscriptionController {
 	public static final String TRUNC_TEXT = " ... (truncated) ... ";
 
 	@RequestMapping("/subscribe")
-	public String subscribe(HttpServletRequest request) {
-		String orderDetails = getOrderDetails(request);
-		String truncatedOrderDetails = truncate(orderDetails, 250);
+	public String subscribe(@RequestParam String orderDetails) {
+		// String orderDetails = getOrderDetails(request);
+		String truncatedOrderDetails = truncate(orderDetails, 25);
 		log(truncatedOrderDetails);
 		return truncatedOrderDetails;
 	}
@@ -35,7 +36,8 @@ public class SubscriptionController {
 	}
 
 	private String getOrderDetails(HttpServletRequest request) {
-		return "" + request.getAttribute("orderDetails").toString();
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/*
