@@ -12,20 +12,20 @@ public class SubscriptionController {
 	public static final String TRUNC_TEXT = " ... (truncated) ... ";
 
 	@RequestMapping("/subscribe")
-	public String subscribe(@RequestParam String orderDetails) {
+	public String subscribe(@RequestParam("orderDetails") String orderDetails, @RequestParam("maxLength") int length) {
 		// String orderDetails = getOrderDetails(request);
-		String truncatedOrderDetails = truncate(orderDetails, 25);
+		String truncatedOrderDetails = truncate(orderDetails, length);
 		log(truncatedOrderDetails);
 		return truncatedOrderDetails;
 	}
 
-	private String truncate(String orderDetails, int i) {
+	private String truncate(String orderDetails, int maxLength) {
 		int truncTextLen = TRUNC_TEXT.length();
 		int orderDetailsLen = orderDetails.length();
-		if ((i < truncTextLen) || i >= orderDetailsLen) {
+		if ((maxLength < truncTextLen) || maxLength >= orderDetailsLen) {
 			return orderDetails;
 		}
-		int leadingIndex = (i - truncTextLen) / 2;
+		int leadingIndex = (maxLength - truncTextLen) / 2;
 		return orderDetails.substring(0, leadingIndex) + TRUNC_TEXT
 				+ orderDetails.substring(orderDetailsLen - leadingIndex, orderDetailsLen);
 	}
